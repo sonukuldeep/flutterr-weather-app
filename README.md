@@ -7,8 +7,9 @@ This is my second flutter app and I'm loving it.
 A heartly thanks to [Rivaan Ranawat](https://www.youtube.com/watch?v=CzRQ9mnmh44), the creator of the tutorial on yt without whom this project would never have been possible.
 
 ## Screenshots
-- ![Light view](https://github.com/sonukuldeep/flutterr-weather-app/assets/57728165/6dd3849c-5ca3-4623-a858-983ddcb5fd2e)
-- ![Dark view](https://github.com/sonukuldeep/flutterr-weather-app/assets/57728165/4c1ae39d-28e6-4cc7-9395-3c9c73e597fd)
+<img src="https://github.com/sonukuldeep/flutterr-weather-app/assets/57728165/6dd3849c-5ca3-4623-a858-983ddcb5fd2e" alt="light-view" width="300px"/>
+
+<img src="https://github.com/sonukuldeep/flutterr-weather-app/assets/57728165/4c1ae39d-28e6-4cc7-9395-3c9c73e597fd" alt="dark-view" width="300px"/>
 
 ## Acknowledgements
 
