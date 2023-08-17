@@ -15,12 +15,12 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
-  double temp = 0;
+  late Future<Map<String, dynamic>> weather;
 
   @override
   void initState() {
     super.initState();
-    getCurrentWeather();
+    weather = getCurrentWeather();
   }
 
   Future<Map<String, dynamic>> getCurrentWeather() async {
@@ -50,13 +50,17 @@ class _WeatherScreenState extends State<WeatherScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                weather = getCurrentWeather();
+              });
+            },
             icon: const Icon(Icons.refresh),
           ),
         ],
       ),
       body: FutureBuilder(
-          future: getCurrentWeather(),
+          future: weather,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -68,7 +72,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
             }
 
             final data = snapshot.data!['list'];
-            final currentTemp = data[0]['main']['temp'];
+            final currentTemp =
+                (data[0]['main']['temp'] - 273.15).toString().substring(0, 5);
             final currentPressure = data[0]['main']['pressure'];
             final humidity = data[0]['main']['humidity'];
             final currentSky = data[0]['weather'][0]['main'];
@@ -97,7 +102,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             child: Column(
                               children: [
                                 Text(
-                                  "$currentTemp K",
+                                  "$currentTemp°C",
                                   style: const TextStyle(
                                       fontSize: 32,
                                       fontWeight: FontWeight.bold),
@@ -136,41 +141,45 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
 
                   /// scroller
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(
-                  //     children: [
-                  //       for (int i = 1; i < 6; i++)
-                  //         HourlyForecastItem(
-                  //             icon: data[i]["weather"][0]["main"] == 'Clouds' ||
-                  //                     data[i]["weather"][0]["main"] == 'Rain'
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        for (int i = 1; i < 6; i++)
+                          HourlyForecastItem(
+                            icon: data[i]["weather"][0]["main"] == 'Clouds' ||
+                                    data[i]["weather"][0]["main"] == 'Rain'
+                                ? Icons.cloud
+                                : Icons.sunny,
+                            temp:
+                                "${(data[i]['main']['temp'] - 273.15).toString().substring(0, 5)}°C",
+                            time: data[i]["dt_txt"]
+                                .toString()
+                                .split(" ")[1]
+                                .substring(0, 5),
+                          ),
+                      ],
+                    ),
+                  ),
+
+                  /// list view builder approach
+                  // SizedBox(
+                  //   height: 120,
+                  //   child: ListView.builder(
+                  //       scrollDirection: Axis.horizontal,
+                  //       itemCount: 15,
+                  //       itemBuilder: (context, index) {
+                  //         final hourlyForecast = data[index + 1];
+                  //         final time = DateTime.parse(hourlyForecast['dt_txt']);
+                  //         final sky = hourlyForecast["weather"][0]["main"];
+                  //         return HourlyForecastItem(
+                  //             icon: sky == 'Clouds' || sky == 'Rain'
                   //                 ? Icons.cloud
                   //                 : Icons.sunny,
-                  //             temp: data[i]['main']['temp'].toString(),
-                  //             time: data[i]["dt_txt"]
-                  //                 .toString()
-                  //                 .split(" ")[1]
-                  //                 .substring(0, 5),),
-                  //     ],
-                  //   ),
+                  //             temp: hourlyForecast['main']['temp'].toString(),
+                  //             time: DateFormat.Hm().format(time));
+                  //       }),
                   // ),
-                  SizedBox(
-                    height: 120,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 15,
-                        itemBuilder: (context, index) {
-                          final hourlyForecast = data[index + 1];
-                          final time = DateTime.parse(hourlyForecast['dt_txt']);
-                          final sky = hourlyForecast["weather"][0]["main"];
-                          return HourlyForecastItem(
-                              icon: sky == 'Clouds' || sky == 'Rain'
-                                  ? Icons.cloud
-                                  : Icons.sunny,
-                              temp: hourlyForecast['main']['temp'].toString(),
-                              time: DateFormat.Hm().format(time));
-                        }),
-                  ),
                   const SizedBox(
                     height: 20,
                   ),

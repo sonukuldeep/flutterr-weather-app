@@ -1,16 +1,48 @@
-# weather_app
+# Flutter Weather app
 
-A new Flutter project.
+## Currency converter app
 
-## Getting Started
+This is my second flutter app and I'm loving it.
 
-This project is a starting point for a Flutter application.
+A heartly thanks to [Rivaan Ranawat](https://www.youtube.com/watch?v=CzRQ9mnmh44), the creator of the tutorial on yt without whom this project would never have been possible.
 
-A few resources to get you started if this is your first Flutter project:
+## Acknowledgements
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+ - Rivaan Ranawat the youtuber
+ - Flutter community
+ - Every tutorial video on yt
+ - Opensource community
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Installation
+
+The project requires flutter, android sdk and git.
+
+### Clone the website using
+```npm
+git clone 
+```
+
+### Run using vs code 
+
+## Important files
+```css
+lib
+├── main.dart
+└── weather_scrren.dart
+```
+
+## Badges
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/) 
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
+
+
+## Author
+- [@sonukuldeep](https://www.github.com/sonukuldeep)
+
+
+## 🛠 Skills
+
+[![My Skills](https://skillicons.dev/icons?i=js,ts,html,css,tailwind,sass,nodejs,react,nextjs,svelte,vue,flask,rust,python,php,solidity,mongodb,mysql,prisma,figma,threejs,unity,godot,dart,flutter)](https://github.com/sonukuldeep)
