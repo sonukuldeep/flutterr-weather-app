@@ -23,6 +23,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
     weather = getCurrentWeather();
   }
 
+  String convertKelvinToCentigrade(double temp) {
+    final tempInCentigrade = (temp - 273.15).toStringAsPrecision(4);
+    return "${tempInCentigrade}°C";
+  }
+
   Future<Map<String, dynamic>> getCurrentWeather() async {
     String urlAddress =
         "https://api.openweathermap.org/data/2.5/forecast?lat=28.70&lon=77.10&appid=${dotenv.env['API_KEY']}";
@@ -73,7 +78,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
             final data = snapshot.data!['list'];
             final currentTemp =
-                (data[0]['main']['temp'] - 273.15).toString().substring(0, 5);
+                convertKelvinToCentigrade(data[0]['main']['temp']);
             final currentPressure = data[0]['main']['pressure'];
             final humidity = data[0]['main']['humidity'];
             final currentSky = data[0]['weather'][0]['main'];
@@ -102,7 +107,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             child: Column(
                               children: [
                                 Text(
-                                  "$currentTemp°C",
+                                  currentTemp,
                                   style: const TextStyle(
                                       fontSize: 32,
                                       fontWeight: FontWeight.bold),
@@ -151,8 +156,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                     data[i]["weather"][0]["main"] == 'Rain'
                                 ? Icons.cloud
                                 : Icons.sunny,
-                            temp:
-                                "${(data[i]['main']['temp'] - 273.15).toString().substring(0, 5)}°C",
+                            temp: convertKelvinToCentigrade(
+                              double.parse(data[i]['main']['temp'].toString()),
+                            ),
                             time: data[i]["dt_txt"]
                                 .toString()
                                 .split(" ")[1]
