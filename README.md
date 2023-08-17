@@ -29,6 +29,17 @@ git clone
 ```
 
 ### Run using vs code 
+```js
+flutter run
+```
+
+### Environment file Example
+```txt
+API_URL=xyzabc...
+```
+Note .env file is required containing an api key from openweathermap
+
+Place the .env file in the root of the folder
 
 ## Important files
 ```css
